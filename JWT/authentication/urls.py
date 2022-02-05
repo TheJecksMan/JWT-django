@@ -7,4 +7,5 @@ urlpatterns = [
     path('login/', views.RegistrationAPI.as_view(), name='login'),
     path('logout/', views.RegistrationAPI.as_view(), name='logout'),
     path('test-api/', views.TestAPI.as_view(), name='test'),
+    path('test/', views.test_token),
 ]

@@ -1,12 +1,9 @@
-
+import json
 from django.http import HttpResponse
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.contrib.auth.models import User
 
 from authlib.jose import jwt
-
 
 private_key = '''-----BEGIN RSA PRIVATE KEY-----
 MIIBOQIBAAJAdNrvKFDoAedA9uE855bC4APqH8UGiafeY9arXoX3UKM1tezkEuJH
@@ -27,8 +24,11 @@ Y9arXoX3UKM1tezkEuJHG6L9pGwZafANJ3hfYiYJQEEKO64E4r+lOQIDAQAB
 
 def encode_token():
     # Подготовка токена
-    header = {'alg': 'RS256'}
-    payload = {'test1': 'test1'}
+    header = {"alg": "RS256"}
+    payload = {"email": "test1@inbox.ru",
+               "username": "test1",
+               "password1": "12345",
+               "password2": "12345"}
     token = jwt.encode(header, payload, private_key)
     return token.decode("utf-8")
 
@@ -39,17 +39,14 @@ def decode_token(token):
     return claims
 
 
-class RegistrationAPI(APIView):
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
+def get_token(request):
+    try:
+        token = request.headers['Authorization']  # Получение заголовка
+    except:
+        return HttpResponse('Отсутсвует заголовок')
 
-    def get(self, request, format=None):
-
-        content = {
-            'user': str(request.user),  # `django.contrib.auth.User` instance.
-            'auth': str(request.auth),  # None
-        }
-        return Response(content)
+    token = token.replace('Bearer', '').strip()
+    return decode_token(token)
 
 
 class TestAPI(APIView):
@@ -57,10 +54,33 @@ class TestAPI(APIView):
 
 
 def test_token(request):
-    try:
-        token = request.headers['Authorization']  # Получение заголовка
-    except:
-        return HttpResponse('Отсутсвует заголовок')
+    print(encode_token())
+    print(get_token(request))
+    return HttpResponse(get_token(request))
 
-    token = token.replace('Bearer', '').strip()
-    return HttpResponse(decode_token(token))
+
+def sing_up(request):  # Регистрация
+    json_data = str(get_token(request))
+    json_object = json_data.replace("'", '"')
+    json_data = json.loads(json_object)  # Преобразование в словарь
+
+    email = json_data['email']
+    username = json_data['username']
+    password1 = json_data['password1']
+    password2 = json_data['password2']
+    if password1 == password2:  # Проверка валидности пароля
+        # Проверка валидности email
+        if not User.objects.filter(email=email).exists():
+            # Проверка валидности имени
+            if not User.objects.filter(username=username).exists():
+                user = User.objects.create_user(
+                    username, email, password1)
+
+                user.save()  # Создание пользователя
+                return HttpResponse('Пользователь создан')
+            else:
+                return HttpResponse('Такой пользователь уже существет')
+        else:
+            return HttpResponse('Email уже зарегистрирован')
+    else:
+        return HttpResponse('Пароли не совпадают')

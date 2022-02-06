@@ -1,9 +1,11 @@
-import json
 from django.http import HttpResponse
-from rest_framework.views import APIView
-from django.contrib.auth.models import User
 
 from authlib.jose import jwt
+import json
+
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+
 
 private_key = '''-----BEGIN RSA PRIVATE KEY-----
 MIIBOQIBAAJAdNrvKFDoAedA9uE855bC4APqH8UGiafeY9arXoX3UKM1tezkEuJH
@@ -22,13 +24,13 @@ Y9arXoX3UKM1tezkEuJHG6L9pGwZafANJ3hfYiYJQEEKO64E4r+lOQIDAQAB
 -----END PUBLIC KEY-----'''
 
 
-def encode_token():
+def encode_token(payload):
     # Подготовка токена
     header = {"alg": "RS256"}
-    payload = {"email": "test1@inbox.ru",
-               "username": "test1",
-               "password1": "12345",
-               "password2": "12345"}
+    # payload = {"email": "test1@inbox.ru",
+    #            "username": "test1",
+    #            "password1": "12345",
+    #            "password2": "12345"}
     token = jwt.encode(header, payload, private_key)
     return token.decode("utf-8")
 
@@ -49,20 +51,17 @@ def get_token(request):
     return decode_token(token)
 
 
-class TestAPI(APIView):
-    pass
-
-
-def test_token(request):
-    print(encode_token())
-    print(get_token(request))
-    return HttpResponse(get_token(request))
+def generations_tokens(request):
+    return HttpResponse(encode_token(json.loads(request.GET['data'])))
 
 
 def sing_up(request):  # Регистрация
-    json_data = str(get_token(request))
-    json_object = json_data.replace("'", '"')
-    json_data = json.loads(json_object)  # Преобразование в словарь
+    try:
+        json_data = str(get_token(request))
+        json_object = json_data.replace("'", '"')
+        json_data = json.loads(json_object)  # Преобразование в словарь
+    except:
+        return HttpResponse('Token not valid')
 
     email = json_data['email']
     username = json_data['username']
@@ -84,3 +83,18 @@ def sing_up(request):  # Регистрация
             return HttpResponse('Email уже зарегистрирован')
     else:
         return HttpResponse('Пароли не совпадают')
+
+
+def sing_in(request):
+    json_data = str(get_token(request))
+    json_object = json_data.replace("'", '"')
+    json_data = json.loads(json_object)  # Преобразование в словарь
+
+    username = json_data['username']
+    password = json['password']
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return HttpResponse('Вход был успешно произведён!')
+    else:
+        return HttpResponse('Ошибка')

@@ -1,4 +1,3 @@
-from socket import RCVALL_SOCKETLEVELONLY
 from django.http import HttpResponse
 
 from authlib.jose import jwt
@@ -38,9 +37,8 @@ def decode_token(token):
     claims = jwt.decode(token, public_key)
     return str(claims)
 
+
 # Получение токена и его десериализация
-
-
 def get_token(request):
     try:
         # Получение заголовка
@@ -53,6 +51,5 @@ def get_token(request):
 
     json_object = token.replace("'", '"')
     json_data = json.loads(json_object)
-    print(token)
 
     return json_data

@@ -1,6 +1,4 @@
 from django.http import HttpResponse
-
-
 from .api.json_jwt import *
 
 from django.contrib.auth.models import User

@@ -92,8 +92,9 @@
   background-color: #fff;
   display: flex;
   height: 49px;
+  justify-content: center;
+  text-align: center;
   align-items: center;
-  justify-content: space-between;
   margin: 10px 15px 0px 15px;
 }
 .paginator_ref {

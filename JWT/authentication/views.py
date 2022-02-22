@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+
 from .api.json_jwt import *
 
 from django.contrib.auth.models import User
@@ -32,21 +33,26 @@ def sing_up(request):  # Регистрация
             else:
                 return HttpResponse('Такой пользователь уже существет')
         else:
-            return HttpResponse('Email уже зарегистрирован')
+            return HttpResponse('Email уже зарегистрирован', status=404)
     else:
         return HttpResponse('Пароли не совпадают')
 
 
 def sing_in(request):
-    json_data = str(get_token(request))
-    json_object = json_data.replace("'", '"')
-    json_data = json.loads(json_object)  # Преобразование в словарь
+    try:
+        json_data = get_token(request)
+    except:
+        return HttpResponse('Token not valid')
 
     username = json_data['username']
-    password = json['password']
+    password = json_data['password_user']
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return HttpResponse('Вход был успешно произведён!')
+        return JsonResponse(
+            {
+                'username': user.username,
+                'sessionid': request.session.session_key
+            })
     else:
         return HttpResponse('Ошибка')

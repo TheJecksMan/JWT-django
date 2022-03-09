@@ -57,7 +57,7 @@ def sing_in(request):
                 'sessionid': request.session.session_key
             })
     else:
-        return JsonResponse({"ErrorCode": -1, "ErrorDesc": "Что то пошло не так"})
+        return JsonResponse({"ErrorCode": -1, "ErrorDesc": "Некорректный логин или пароль"})
 
 
 def reset_password(request):
@@ -66,12 +66,7 @@ def reset_password(request):
 
 def edit_profile(request):
     json_data = json_worker(request)
-
-
-# @api_view('POST')
-# def rest_sign_in(request):
-#     if request.method == 'POST':
-#         pass
+    pass
 
 
 def json_worker(request):

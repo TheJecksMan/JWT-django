@@ -1,13 +1,9 @@
 import json
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-
-
-def generations_tokens(request):
-    pass
 
 
 @csrf_exempt

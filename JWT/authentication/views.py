@@ -1,20 +1,19 @@
+import json
 from django.http import HttpResponse, JsonResponse
-
-from .api.json_jwt import *
+from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 
 
 def generations_tokens(request):
-    return HttpResponse(encode_token(request.GET['data']))
+    pass
 
 
+@csrf_exempt
 def sing_up(request):  # Регистрация
-    try:
-        json_data = get_token(request)
-    except:
-        return HttpResponse('Token not valid')
+
+    json_data = json_worker(request)
 
     email = json_data['email']
     username = json_data['username']
@@ -29,30 +28,34 @@ def sing_up(request):  # Регистрация
                     username, email, password1)
 
                 user.save()  # Создание пользователя
-                return HttpResponse('Пользователь создан')
+                return JsonResponse({"ErrorCode": 0, "ErrorDesc": "Пользователь создан"})
             else:
-                return HttpResponse('Такой пользователь уже существет')
+                return JsonResponse({"ErrorCode": -1, "ErrorDesc": "Такой пользователь уже существет"})
         else:
-            return HttpResponse('Email уже зарегистрирован', status=404)
+            return JsonResponse({"ErrorCode": -1, "ErrorDesc": "Email уже зарегистрирован"})
+
     else:
-        return HttpResponse('Пароли не совпадают')
+        return JsonResponse({"ErrorCode": -1, "ErrorDesc": "Пароли не совпадают"})
 
 
+@csrf_exempt
 def sing_in(request):
-    try:
-        json_data = get_token(request)
-    except:
-        return HttpResponse('Token not valid')
+    json_data = json_worker(request)
 
     username = json_data['username']
     password = json_data['password_user']
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
+
         return JsonResponse(
             {
                 'username': user.username,
                 'sessionid': request.session.session_key
             })
     else:
-        return HttpResponse('Ошибка')
+        return JsonResponse({"ErrorCode": -1, "ErrorDesc": "Что то пошло не так"})
+
+
+def json_worker(request):
+    return json.loads(request.body.decode('utf-8'))

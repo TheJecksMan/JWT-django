@@ -1,12 +1,9 @@
 import json
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
-
-
-from rest_framework.decorators import api_view
+from django.contrib.auth import authenticate, login, logout
 
 
 @csrf_exempt
@@ -64,9 +61,16 @@ def reset_password(request):
     pass
 
 
+@csrf_exempt
 def edit_profile(request):
     json_data = json_worker(request)
-    pass
+    return HttpResponse(request.user.is_authenticated)
+
+
+@csrf_exempt
+def logout_user(request):
+    logout(request)
+    return HttpResponse("Logout")
 
 
 def json_worker(request):

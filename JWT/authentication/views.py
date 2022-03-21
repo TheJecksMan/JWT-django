@@ -1,5 +1,5 @@
 import json
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from django.contrib.auth.models import User
@@ -99,3 +99,9 @@ def logout_user(request):
 
 def json_worker(request):  # десерелизация json
     return json.loads(request.body.decode('utf-8'))
+
+
+@csrf_exempt
+def gener(request):
+    text = request.GET['data']
+    return HttpResponse("text")

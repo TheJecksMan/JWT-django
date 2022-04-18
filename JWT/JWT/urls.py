@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/', include('authentication.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
     path('news/', include('news.urls')),
+    path('profile/', include('account.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

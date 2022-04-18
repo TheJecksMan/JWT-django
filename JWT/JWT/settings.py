@@ -25,13 +25,13 @@ SECRET_KEY = 'django-insecure-u*o-bft7b9=3ty5l3m!^m4@&79q)dh$_^!$s@wgodfa4pxt0bd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["192.168.130.36", "192.168.43.81", "localhost"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'debug_toolbar',
+    'api',
     'rest_framework',
     'authentication',
     'news',
@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,11 +55,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
 
 ROOT_URLCONF = 'JWT.urls'
 
@@ -68,7 +62,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',

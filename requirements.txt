@@ -1,13 +1,14 @@
+# Django
 asgiref==3.5.0
-autopep8==1.6.0
-cffi==1.15.0
-cryptography==36.0.1
-Django==4.0.2
-django-debug-toolbar==3.2.4
-djangorestframework==3.13.1
-pycodestyle==2.8.0
-pycparser==2.21
-pytz==2021.3
+Django==4.0.4
 sqlparse==0.4.2
+tzdata==2022.1
+# DRF
+djangorestframework==3.13.1
+pytz==2022.1
+# Autopep8
+autopep8==1.6.0
+pycodestyle==2.8.0
 toml==0.10.2
-tzdata==2021.5
+# cors
+django-cors-headers==3.11.0

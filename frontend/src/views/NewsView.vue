@@ -1,0 +1,132 @@
+<template>
+  <div class="content">
+    <span class="date-publish"> Дата публикации: 12 апреля</span>
+    <div>
+      <h1 class="name-publish">
+        <span class="text-news">{{ el.title | linebreaks }}</span>
+      </h1>
+    </div>
+
+    <div class="inform-publish">
+      <div>
+        <div class="anons-publish">{{ el.anons | linebreaks }}</div>
+      </div>
+      <a class="learn-more" href="">Читать далее</a>
+    </div>
+  </div>
+</template>
+
+<style>
+/* page */
+.layout-page-width {
+  margin: 0 auto;
+  min-width: 320px;
+}
+@media (min-width: 1024px) {
+  .layout-page-width {
+    padding: 0 24px;
+    max-width: 1096px;
+  }
+}
+.page {
+  display: flex;
+  max-width: 1096px;
+}
+.nav {
+  width: 100%;
+}
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  margin: 10px 15px 0px 15px;
+  background-color: white;
+  box-shadow: inset 0 -1px 0 0 #d5dddf;
+}
+
+.nav-text {
+  padding: 15px;
+  font-family: Raleway-Bold;
+  font-size: 18px;
+  color: #6f7577;
+  cursor: pointer;
+}
+.nav-text:hover {
+  text-decoration: underline;
+}
+/* content */
+.content {
+  flex: 0;
+  background-color: white;
+  margin: 10px 15px 0px 15px;
+  overflow-wrap: break-word;
+  padding: 10px;
+}
+.learn-more {
+  background-color: initial;
+  border: 1px solid #6f7577;
+  border-radius: 3px;
+  color: #6f7577;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.8125rem;
+  height: 36px;
+  line-height: 2.25rem;
+  margin-top: 18px;
+  padding: 0 13px;
+  text-decoration: none;
+}
+.name-publish {
+  font-family: Raleway-Bold;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin: 10px 0px 5px 0px;
+}
+.anons-publish {
+  font-family: Raleway-Regular;
+  margin-top: 5px;
+  line-height: 1.56;
+  font-size: 1rem;
+}
+.tag-publish {
+  color: #777;
+  margin-bottom: 5px;
+}
+.date-publish {
+  color: #777;
+}
+.text-news {
+  font-family: Raleway-Bold;
+}
+/* adatptive */
+@media (max-width: 513px) {
+  .header-nav-text {
+    display: none;
+  }
+}
+
+/* paginator */
+.paginator {
+  background-color: #fff;
+  display: flex;
+  height: 49px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin: 10px 15px 0px 15px;
+}
+.paginator_ref {
+  text-decoration: none;
+  color: #000;
+}
+.paginator-text {
+  padding: 10px;
+}
+/*Font*/
+@font-face {
+  font-family: Raleway-Bold;
+  src: url("/static/news/font/Raleway-Bold.ttf");
+  font-display: swap;
+}
+</style>

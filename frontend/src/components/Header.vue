@@ -1,88 +1,57 @@
+<script setup>
+</script>
+
 <template>
-    <main>
-        <header class="header">
-            <div class="container">
-                <div class="header__inner">
-                    <div class="header__logo">SmartNoteBook</div>
-
-                    <nav class="nav">
-                        <a class="nav__link" href="#">Новости</a>
-                        <a class="nav__link btn" href="#">О нас</a>
-                    </nav>
-
-                </div>
-            </div>
-        </header>
-    </main>
+  <header>
+    <div class="wrapper">
+      <div class="container">
+        <div class="container__inner">
+          <span class="logo">SmartNoteBook</span>
+          <div class="navigation container__inner">
+            <span class="item">Главная</span>
+            <span class="item">Новости</span>
+            <span class="item">О программе</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 </template>
 
 <style>
-/* Container */
-.container {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-@media(max-width: 1230px) {
-    .container {
-        max-width: 900px;
-    }
-}
-
-@media(max-width: 992px) {
-    .container {
-        max-width: 700px;
-    }
-}
-
-@media(max-width: 768px) {
-    .container {
-        max-width: 600px;
-    }
-}
-
-body{
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap");
+body {
+  padding: 0;
   margin: 0;
 }
-
-.header {
-    width: 100%;
-    padding-top: 25px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
+/* header */
+.wrapper {
+  width: 100%;
+  height: 48px;
+  background: transparent;
+}
+.container {
+  margin: 0 auto;
+  padding: 16px 0;
+  max-width: 1200px;
+}
+.container__inner {
+  display: flex;
+  justify-content: space-between;
+  margin-left: auto;
 }
 
-.header__inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.logo {
+  color: white;
+  margin: 10px;
+  font-family: "Raleway", sans-serif;
 }
-
-.header__logo {
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
+.navigation {
+  margin: 10px;
 }
-
-/* Nav */
-.nav {
-    font-size: 18px;
+.item {
+  color: white;
+  margin: 0 10px;
+  font-family: "Raleway", sans-serif;
 }
-
-.nav__link {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 15px;
-    position: relative;
-
-    color: #fff;
-    text-decoration: none;
-
-    transition: color .1s linear;
-}
-
 </style>

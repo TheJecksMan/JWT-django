@@ -1,0 +1,106 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #D0DFF4;
+}
+.container{
+    width: 40vw;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+#container-title{
+    font-weight: 400;
+    font-size: 1.6rem;
+}
+#dragArea{
+    position: relative;
+    margin: 30px 0px;
+    width: 100%;
+    height: 40vh;
+    border: 3px dashed rgba(128, 128, 128, .2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    transition: 0.3s ease-in-out all;
+}
+.dragArea__highlight{
+    border: 3px dashed rgba(128, 128, 128, .6) !important;
+}
+.info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.info.hidden > *{
+    border: none;
+}
+#dragArea-logo{
+    background-color: #1586F5;
+    -webkit-mask: url(./logo.svg) no-repeat center;
+    mask: url(./logo.svg) no-repeat center;
+    max-width: 100px;
+    height: auto;
+}
+#dragArea-description{
+    text-align: center;
+    max-width: 180px;
+    font-size: 1.4rem;
+}
+#dragArea-description button{
+    font-size: 1.4rem;
+    cursor: pointer;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #2d96ff;
+    transition: 0.2s ease-in-out all;
+    margin-bottom: 15px;
+}
+#dragArea-description button:hover{
+    color: #1586F5;
+}
+#dragArea-support{
+    opacity: 0.5;
+}
+
+#container-submitButton{
+    max-width: fit-content;
+    margin: 0 auto;
+    background-color: #1586F5; 
+    padding: 9px 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+}
+#preview{
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.hidden{
+    display: none;
+}
+.result-title{
+    font-weight: 400;
+    font-size: 1.6rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}

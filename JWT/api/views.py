@@ -1,3 +1,4 @@
+from django import views
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -10,9 +11,11 @@ from rest_framework import status
 from . import serializers
 
 
+from rest_framework import generics
 import cv2 as cv
 import pytesseract
 import numpy as np
+from django.views.decorators.csrf import csrf_exempt
 
 
 @api_view(['POST'])
@@ -46,15 +49,15 @@ def regustration_account(request):
     return Response(serializer._errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@csrf_exempt
 def file_orc(request):
-    # img = cv.imread('E:\\Programming\\Repositories\\JWT django\\JWT\\api\\img\\test1.jpg')
-    # pytesseract.pytesseract.tesseract_cmd = 'D:\Files\\tesseract\\tesseract.exe'
-    # text = pytesseract.pytesseract.image_to_string(img, lang="rus")
-    if request.method == 'POST':
+
+    if request.method == 'POST' or request.method == 'FILES':
         f = request.FILES['img']
         receipt_image = f.read()
-        nparr = np.fromstring(receipt_image, np.uint8)
+        nparr = np.frombuffer(receipt_image, np.uint8)
         img_np = cv.imdecode(nparr, 1)
+
         pytesseract.pytesseract.tesseract_cmd = 'D:\Files\\tesseract\\tesseract.exe'
         text = pytesseract.pytesseract.image_to_string(img_np, lang="rus")
         if not text or len(text.strip()) == 0:

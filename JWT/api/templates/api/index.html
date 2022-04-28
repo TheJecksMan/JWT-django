@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <title>Smart NoteBook</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="container-title">Загрузите файл сюда: </h1>
+        <form id="dragArea" enctype="multipart/form-data">
+            <div class="info">
+                <svg id="dragArea-logo">
+                    <use href="{% static 'img/logo.svg' %}" style="--color_fill: #1586F5;"></use>
+                </svg>
+                <p id="dragArea-description">Перетащите сюда фото или <button onclick="selectFileOnClick();"
+                        type="button">выберите</button></p>
+                <span id="dragArea-support">Поддерживаются: JPG, PNG</span>
+            </div>
+            <img src="" id="preview" alt="Превью фото" class="hidden" onclick="selectFileOnClick();">
+        </form>
+        <button id="container-submitButton" onclick="fetchData();">Обработать</button>
+
+        <div class="resultArea hidden">
+            <h2 class="resultArea-title">Результат: </h2>
+            <p id="resultArea-resultText">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem veritatis
+                voluptas nostrum itaque fuga velit incidunt beatae hic recusandae ipsa esse iste non aperiam adipisci
+                quis facilis sint, debitis officia.</p>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

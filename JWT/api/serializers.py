@@ -24,3 +24,12 @@ class RegistartionAccount(serializers.Serializer):
     class Meta:
         model = User
         fields = ('__all__')
+
+
+class files(serializers.Serializer):
+    img = serializers.CharField(required=True)
+
+    def create(self, validated_data):
+        img_bytes = validated_data['img']
+
+        return validated_data

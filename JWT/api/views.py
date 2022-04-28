@@ -1,3 +1,5 @@
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import render
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
@@ -8,13 +10,9 @@ from rest_framework import status
 from . import serializers
 
 
-from PIL import Image
-
+import cv2 as cv
 import pytesseract
-
-from rest_framework.decorators import parser_classes
-from rest_framework.views import APIView
-from rest_framework.parsers import FileUploadParser
+import numpy as np
 
 
 @api_view(['POST'])
@@ -48,19 +46,18 @@ def regustration_account(request):
     return Response(serializer._errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['PUT'])
-@parser_classes([FileUploadParser])
 def file_orc(request):
-    text = pytesseract.pytesseract.image_to_string()
-    return Response('test')
-
-
-class FileUploadView(APIView):
-    parser_classes = [FileUploadParser]
-
-    def put(self, request, filename, format=None):
-        file_obj = request.data['file']
-        # ...
-        # do some stuff with uploaded file
-        # ...
-        return Response(status=204)
+    # img = cv.imread('E:\\Programming\\Repositories\\JWT django\\JWT\\api\\img\\test1.jpg')
+    # pytesseract.pytesseract.tesseract_cmd = 'D:\Files\\tesseract\\tesseract.exe'
+    # text = pytesseract.pytesseract.image_to_string(img, lang="rus")
+    if request.method == 'POST':
+        f = request.FILES['img']
+        receipt_image = f.read()
+        nparr = np.fromstring(receipt_image, np.uint8)
+        img_np = cv.imdecode(nparr, 1)
+        pytesseract.pytesseract.tesseract_cmd = 'D:\Files\\tesseract\\tesseract.exe'
+        text = pytesseract.pytesseract.image_to_string(img_np, lang="rus")
+        if not text or len(text.strip()) == 0:
+            return HttpResponse('Не удалось распознать текст')
+        return HttpResponse(text)
+    return render(request, 'api/file_upload.html')

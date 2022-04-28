@@ -10,7 +10,7 @@ from . import serializers
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-@authentication_classes([SessionAuthentication, BasicAuthentication])
+@authentication_classes([BasicAuthentication])
 def login_account(request):
     """
     Получение данных, при входе в аккаунт

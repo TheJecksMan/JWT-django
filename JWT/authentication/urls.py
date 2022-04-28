@@ -8,5 +8,5 @@ urlpatterns = [
     path('edit/edit_profile', views.edit_profile),
     path('edit/resset_password', views.reset_password),
     path('logout', views.logout_user),
-    path('ded', views.gener)
+    path('test', views.gener)
 ]

@@ -12,3 +12,15 @@ pycodestyle==2.8.0
 toml==0.10.2
 # cors
 django-cors-headers==3.11.0
+
+# pylint
+astroid==2.11.3
+colorama==0.4.4
+dill==0.3.4
+isort==5.10.1
+lazy-object-proxy==1.7.1
+mccabe==0.7.0
+platformdirs==2.5.2
+pylint==2.13.7
+tomli==2.0.1
+wrapt==1.14.0

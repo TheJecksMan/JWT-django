@@ -52,7 +52,7 @@ def sing_in(request):
                 'username': user.username,
                 'firstname': user.first_name,
                 'lastname': user.last_name,
-                'date_joined': user.date_joined,
+                'date_joined': user.date_joined.strftime("%d.%m.%Y %H:%M"),
                 'sessionid': request.session.session_key
             })
     else:

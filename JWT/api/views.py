@@ -61,6 +61,6 @@ def file_orc(request):
         pytesseract.pytesseract.tesseract_cmd = 'D:\Files\\tesseract\\tesseract.exe'
         text = pytesseract.pytesseract.image_to_string(img_np, lang="rus")
         if not text or len(text.strip()) == 0:
-            return HttpResponse('Не удалось распознать текст')
-        return HttpResponse(text)
+            return render(request, 'api/file_upload.html', {'text': 'Не удалось распознать текст'})
+        return render(request, 'api/file_upload.html', {'text': text})
     return render(request, 'api/file_upload.html')

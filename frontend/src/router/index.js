@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import PageNotFound from "../views/PageNotFound.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,11 +18,15 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AboutView.vue"),
     },
-    // {
-    //   path: "/news",
-    //   name: "news",
-    //   component: () => import("../views/NewsView.vue"),
-    // },
+    {
+      path: "/news",
+      name: "news",
+      component: () => import("../views/NewsView.vue"),
+    },
+    { 
+      path: '/:pathMatch(.*)*', 
+      name: 'NotFound', 
+      component: PageNotFound },
   ],
 });
 

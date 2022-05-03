@@ -1,3 +1,5 @@
+
+
 <template>
   <div class="wrapper_about">
     <div class="page_about">
@@ -19,3 +21,4 @@
   overflow: hidden !important;
 } */
 </style>
+

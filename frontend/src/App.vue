@@ -10,20 +10,20 @@ import { RouterLink, RouterView } from "vue-router";
           <div class="container__inner">
             <div class="logo">
               <img src="@/assets/logo.svg" alt="" width="35" height="35" />
-              <span class="logo_text">SmartNoteBook</span>
+              <span class="logo_text" :style="styleObject">SmartNoteBook</span>
             </div>
             <div class="navigation container__inner">
-              <div>
+              <div class="item_bar">
                 <RouterLink to="/">
                   <span class="item">Главная</span>
                 </RouterLink>
               </div>
-              <div>
+              <div class="item_bar">
                 <RouterLink to="/news">
                   <span class="item">Новости</span>
                 </RouterLink>
               </div>
-              <div>
+              <div class="item_bar">
                 <RouterLink to="/about">
                   <span class="item">О программе</span>
                 </RouterLink>
@@ -39,50 +39,64 @@ import { RouterLink, RouterView } from "vue-router";
   </div>
 </template>
 
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap");
-body {
-  padding: 0;
-  margin: 0;
+
+<style scoped>
+@media (max-width: 992px) {
+  .item_bar {
+    display: none;
+  }
 }
-a {
-  text-decoration: none;
-}
+
 /* header */
-.wrapper {
-  z-index: 1000;
-  position: absolute;
+header {
   width: 100%;
-  height: 48px;
-  background: transparent;
+  border-bottom: 1px solid rgba(60, 60, 60, 0.12);
+}
+.wrapper {
+  background: white;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .container {
-  margin: 0 auto;
-  padding: 16px 0;
-  max-width: 1200px;
+  margin: 5px auto;
 }
 .container__inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: auto;
+  margin: 0 20px;
 }
-
 .logo {
   display: flex;
   align-items: center;
 }
-.logo_text {
-  color: white;
-  margin: 10px;
-  font-size: 25px;
-  font-family: "Raleway", sans-serif;
-}
+
 .navigation {
   margin: 10px;
 }
+</style>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap");
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.logo_text {
+  color: black;
+  margin: 10px;
+  font-size: 25px;
+  font-family: "Raleway", sans-serif;
+  cursor: default;
+}
 .item {
-  color: white;
+  color: black;
   margin: 0 10px;
   font-size: 18px;
   font-family: "Raleway", sans-serif;

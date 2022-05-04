@@ -1,17 +1,11 @@
-from django import views
+from .serializers import ListNews
+from rest_framework.generics import ListAPIView
 
-from . import serializers
-from rest_framework.response import Response
-from rest_framework.decorators import api_view
-
-from django.core.paginator import Paginator
+from ..models import NewsApp
+from rest_framework.pagination import PageNumberPagination
 
 
-@ api_view(['POST'])
-def list_news(request):
-    serializer = serializers.ListNews(data=request.data)
-    if serializer.is_valid():
-        serializer.update()
-        return Response(serializer.data)
-    else:
-        return Response("Ошибка")
+class ListNews(ListAPIView):
+    queryset = NewsApp.objects.order_by('id').reverse()
+    serializer_class = ListNews
+    pagination_class = PageNumberPagination

@@ -23,10 +23,11 @@ const router = createRouter({
       name: "news",
       component: () => import("../views/NewsView.vue"),
     },
-    { 
-      path: '/:pathMatch(.*)*', 
-      name: 'NotFound', 
-      component: PageNotFound },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: PageNotFound,
+    },
   ],
 });
 

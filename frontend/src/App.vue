@@ -10,7 +10,7 @@ import { RouterLink, RouterView } from "vue-router";
           <div class="container__inner">
             <div class="logo">
               <img src="@/assets/logo.svg" alt="" width="35" height="35" />
-              <span class="logo_text" :style="styleObject">SmartNoteBook</span>
+              <span class="logo_text">SmartNoteBook</span>
             </div>
             <div class="navigation container__inner">
               <div class="item_bar">
@@ -38,7 +38,6 @@ import { RouterLink, RouterView } from "vue-router";
     </main>
   </div>
 </template>
-
 
 <style scoped>
 @media (max-width: 992px) {
@@ -102,4 +101,3 @@ a {
   font-family: "Raleway", sans-serif;
 }
 </style>
-

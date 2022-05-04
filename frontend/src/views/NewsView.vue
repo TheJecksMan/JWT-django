@@ -1,26 +1,42 @@
+<script>
+export default {
+  data() {
+    return {
+      data: {}
+    }
+  },
+  beforeMount(){
+    this.getNews();
+  },
+  methods: {
+    async getNews(){
+      const result = await fetch('http://localhost:8000/api/v2/news?page=1');
+      const data = await result.json();
+      this.data = data.results;
+      console.log(data)
+    }
+  }
+}
+</script>
 <template>
   <div class="wrapper">
     <div class="container">
       <div class="container-content">
-        <div class="container-news">
+        <div class="container-news"  v-for="item in data">
           <div class="head_info">
-            <span class="news_id">#2</span>
+            <span class="news_id">#{{item.id}}</span>
             <span class="news_date">Monday, May 2, 2022</span>
           </div>
           <div class="head_tag">
-            <span class="tag">news</span>
+            <span class="tag">{{item.tags}}</span>
           </div>
           <div class="head_news">
             <span class="news_head">
-              Немного примеров/мыслей навеянных датой 1 Мая…
+              {{item.title}}
             </span>
           </div>
           <div class="body_news">
-            Вчера прилетела "напоминалка" с одного "нынче в опале" ресурса, о
-            том, что два года назад я поделился с друзьями/подписчиками своим
-            свежим опытом общения с современными "производственниками"...
-            Выполняю их рекомендации-пожелания (поделиться на HABR), примерно в
-            ключе "лучше поздно, чем никогда" :)
+            {{item.anons}}
           </div>
           <div class="line_news"></div>
         </div>
@@ -40,7 +56,6 @@
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .container {

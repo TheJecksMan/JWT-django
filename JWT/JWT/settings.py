@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'authentication',
-    'news',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +43,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

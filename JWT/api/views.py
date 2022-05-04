@@ -1,7 +1,5 @@
-from django import views
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 
@@ -10,8 +8,6 @@ from rest_framework import status
 
 from . import serializers
 
-
-from rest_framework import generics
 import cv2 as cv
 import pytesseract
 import numpy as np

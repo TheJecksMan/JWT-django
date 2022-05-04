@@ -1,17 +1,16 @@
 <template>
-  <div class="container__paginator">
-    <div class="paginator">
-      <a class="active" href="#">1</a>
-      <a href="#">2</a>
-      <a href="#">3</a>
-      <a href="#">4</a>
-      <a href="#">5</a>
-      <a href="#">6</a>
-    </div>
-  </div>
+  <div class="container-paginator">
+      <div class="paginator">
+        <a class="active" href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <a href="#">6</a>
+      </div>
 </template>
 
-<style scoped>
+<style>
 .pagination {
   display: inline-block;
 }

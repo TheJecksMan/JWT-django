@@ -14,17 +14,17 @@ import { RouterLink, RouterView } from "vue-router";
             </div>
             <div class="navigation container__inner">
               <div class="item_bar">
-                <RouterLink to="/">
+                <RouterLink :to="{ name: 'home' }">
                   <span class="item">Главная</span>
                 </RouterLink>
               </div>
               <div class="item_bar">
-                <RouterLink to="/news">
+                <RouterLink :to="{ name: 'news' }">
                   <span class="item">Новости</span>
                 </RouterLink>
               </div>
               <div class="item_bar">
-                <RouterLink to="/about">
+                <RouterLink :to="{ name: 'about' }">
                   <span class="item">О программе</span>
                 </RouterLink>
               </div>

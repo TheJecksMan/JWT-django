@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import PageNotFound from "../views/PageNotFound.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,9 +23,14 @@ const router = createRouter({
       component: () => import("../views/NewsView.vue"),
     },
     {
+      path: "/news/post/:post_pk",
+      name: "post",
+      component: () => import("../views/DetailNewsView.vue"),
+    },
+    {
       path: "/:pathMatch(.*)*",
       name: "NotFound",
-      component: PageNotFound,
+      component: () => import("../views/PageNotFound.vue")
     },
   ],
 });

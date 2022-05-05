@@ -1,4 +1,5 @@
 <script>
+import { RouterLink } from "vue-router";
 export default {
   data() {
     return {
@@ -27,12 +28,16 @@ export default {
             <span class="news_date">{{ item.date }}</span>
           </div>
           <div class="head_tag">
-            <span class="tag">{{ item.tags }}</span>
+            <span class="tag" v-for="tag in item.tags" :key="tag">
+              {{ tag }}
+            </span>
           </div>
           <div class="head_news">
-            <span class="news_head">
-              {{ item.title }}
-            </span>
+            <router-link :to="{ name: 'post', params: { post_pk: item.id } }">
+              <span class="news_head">
+                {{ item.title }}
+              </span>
+            </router-link>
           </div>
           <div class="body_news">
             {{ item.anons }}

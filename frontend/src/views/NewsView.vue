@@ -93,6 +93,7 @@ export default {
 </template>
 
 <style scoped>
+/* animation list news */
 .list-enter-active,
 .list-leave-active {
   transition: all 0.5s ease;
@@ -102,8 +103,10 @@ export default {
   opacity: 0;
   transform: translateX(30px);
 }
+
+/* list */
 .container {
-  padding: 100px 0;
+  padding: 100px 20px;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -113,7 +116,7 @@ export default {
 }
 /* news */
 .container-news {
-  margin: 0 20px 60px 20px;
+  margin-bottom: 60px;
 }
 .head_info {
   margin: 5px 0;
@@ -149,9 +152,11 @@ export default {
   white-space: pre-line;
 }
 .head_tag {
-  margin: 5px 0;
+  display: flex;
+  flex-wrap: wrap;
 }
 .tag {
+  margin-bottom: 5px;
   margin-right: 10px;
   font-family: "Raleway", sans-serif;
   background: #42b983;
@@ -169,9 +174,14 @@ export default {
 .container-sidebar {
   display: block;
 }
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+}
 .sidebar {
   box-sizing: border-box;
-  margin: 0;
+  padding-left: 20px;
 }
 .sidebar__box {
   text-align: center;

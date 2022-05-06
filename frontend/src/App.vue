@@ -1,7 +1,3 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
-</script>
-
 <template>
   <div class="wrapper_main">
     <header>
@@ -52,6 +48,7 @@ header {
   border-bottom: 1px solid rgba(60, 60, 60, 0.12);
   background: white;
   position: fixed;
+  z-index: 100;
 }
 .wrapper {
   background: white;
@@ -79,20 +76,6 @@ header {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap");
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
 
 body {
   padding: 0;

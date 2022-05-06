@@ -4,6 +4,8 @@ export default {
   data() {
     return {
       data: {},
+      next: {},
+      previous: {},
     };
   },
   beforeMount() {
@@ -13,11 +15,22 @@ export default {
     async getNews() {
       const result = await fetch("http://localhost:8000/api/v2/news?page=1");
       const data = await result.json();
+      this.previous = data.previous;
+      this.next = data.next;
       this.data = data.results;
+    },
+    async changePages(page) {
+      const result = await fetch(page);
+      const data = await result.json();
+      this.previous = data.previous;
+      this.next = data.next;
+      this.data = data.results;
+      window.scrollTo(0, 0);
     },
   },
 };
 </script>
+
 <template>
   <div class="wrapper">
     <div class="container">
@@ -43,6 +56,22 @@ export default {
             {{ item.anons }}
           </div>
           <div class="line_news"></div>
+        </div>
+        <div class="paginator">
+          <div>
+            <span
+              @click="changePages(previous)"
+              class="pages"
+              v-if="previous !== null"
+            >
+              ← Предыдущая
+            </span>
+          </div>
+          <div>
+            <span @click="changePages(next)" class="pages" v-if="next !== null">
+              Следующая →
+            </span>
+          </div>
         </div>
       </div>
       <div class="container-sidebar">
@@ -91,6 +120,10 @@ export default {
 }
 .head_news {
   margin-bottom: 5px;
+}
+.news_head:hover {
+  color: #3ecf8e !important;
+  transition: 0.3s linear;
 }
 .news_head {
   color: #373737;
@@ -144,26 +177,16 @@ export default {
   font-size: 18px !important;
 }
 /* paginator */
-.container-paginator {
-  display: flex;
-  justify-content: center;
-}
 .paginator {
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
 }
-.paginator a {
-  color: black;
-  padding: 8px 16px;
-  text-decoration: none;
-  border-radius: 5px;
+.pages {
   font-family: "Raleway", sans-serif;
-}
-.paginator a.active {
-  background-color: #42b983;
-  color: white;
-}
-.paginator a:hover:not(.active) {
-  transition: background-color 0.5s linear;
-  background-color: #ddd;
+  border: 1px solid rgba(60, 60, 60, 0.12);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
 }
 </style>

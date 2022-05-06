@@ -35,28 +35,30 @@ export default {
   <div class="wrapper">
     <div class="container">
       <div class="container-content">
-        <div class="container-news" v-for="item in data" :key="item.id">
-          <div class="head_info">
-            <span class="news_id">#{{ item.id }}</span>
-            <span class="news_date">{{ item.date }}</span>
-          </div>
-          <div class="head_tag">
-            <span class="tag" v-for="tag in item.tags" :key="tag">
-              {{ tag }}
-            </span>
-          </div>
-          <div class="head_news">
-            <router-link :to="{ name: 'post', params: { post_pk: item.id } }">
-              <span class="news_head">
-                {{ item.title }}
+        <TransitionGroup name="list">
+          <div class="container-news" v-for="item in data" :key="item.id">
+            <div class="head_info">
+              <span class="news_id">#{{ item.id }}</span>
+              <span class="news_date">{{ item.date }}</span>
+            </div>
+            <div class="head_tag">
+              <span class="tag" v-for="tag in item.tags" :key="tag">
+                {{ tag }}
               </span>
-            </router-link>
+            </div>
+            <div class="head_news">
+              <router-link :to="{ name: 'post', params: { post_pk: item.id } }">
+                <span class="news_head">
+                  {{ item.title }}
+                </span>
+              </router-link>
+            </div>
+            <div class="body_news">
+              {{ item.anons }}
+            </div>
+            <div class="line_news"></div>
           </div>
-          <div class="body_news">
-            {{ item.anons }}
-          </div>
-          <div class="line_news"></div>
-        </div>
+        </TransitionGroup>
         <div class="paginator">
           <div>
             <span
@@ -91,8 +93,17 @@ export default {
 </template>
 
 <style scoped>
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
 .container {
-  padding: 60px 0;
+  padding: 100px 0;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;

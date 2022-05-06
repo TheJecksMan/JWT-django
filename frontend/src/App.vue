@@ -50,6 +50,8 @@ import { RouterLink, RouterView } from "vue-router";
 header {
   width: 100%;
   border-bottom: 1px solid rgba(60, 60, 60, 0.12);
+  background: white;
+  position: fixed;
 }
 .wrapper {
   background: white;

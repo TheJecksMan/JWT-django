@@ -74,6 +74,7 @@ header {
 }
 </style>
 
+
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap");
 
@@ -83,7 +84,7 @@ body {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .logo_text {

@@ -117,6 +117,7 @@ export default {
 /* news */
 .container-news {
   margin-bottom: 60px;
+  box-sizing: border-box;
 }
 .head_info {
   margin: 5px 0;

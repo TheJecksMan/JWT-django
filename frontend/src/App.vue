@@ -63,9 +63,21 @@ header {
   display: flex;
   align-items: center;
 }
-
 .navigation {
   margin: 10px;
+}
+.logo_text {
+  color: black;
+  margin: 10px;
+  font-size: 25px;
+  font-family: "Raleway", sans-serif;
+  cursor: default;
+}
+.item {
+  color: black;
+  margin: 0 10px;
+  font-size: 18px;
+  font-family: "Raleway", sans-serif;
 }
 </style>
 
@@ -82,19 +94,5 @@ body {
 
 a {
   text-decoration: none !important;
-}
-
-.logo_text {
-  color: black;
-  margin: 10px;
-  font-size: 25px;
-  font-family: "Raleway", sans-serif;
-  cursor: default;
-}
-.item {
-  color: black;
-  margin: 0 10px;
-  font-size: 18px;
-  font-family: "Raleway", sans-serif;
 }
 </style>

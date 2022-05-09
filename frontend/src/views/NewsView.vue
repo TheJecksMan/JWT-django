@@ -104,11 +104,13 @@ export default {
   transform: translateX(30px);
 }
 
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 /* list */
 .container {
   padding: 100px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
 }
 .container-content {

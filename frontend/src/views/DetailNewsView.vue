@@ -48,10 +48,8 @@ export default {
 
 <style scoped>
 .container {
-  padding: 100px 0;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
+  padding: 100px 0 !important;
+  display: flex !important;
 }
 .container-news {
   margin: 0 20px 60px 20px;

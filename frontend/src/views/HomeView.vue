@@ -1,9 +1,8 @@
 <template>
-  <div class="main_page"></div>
+  <div class="wrapper">
+    <div class="container"></div>
+  </div>
 </template>
 
-<style>
-.main_page {
-  z-index: 1;
-}
+<style scoped>
 </style>

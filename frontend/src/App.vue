@@ -36,7 +36,7 @@
 </template>
 
 <style scoped>
-@media (max-width: 992px) {
+@media screen and (max-width: 992px) {
   .item_bar {
     display: none;
   }
@@ -51,12 +51,7 @@ header {
   z-index: 100;
 }
 .wrapper {
-  background: white;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.container {
-  margin: 5px auto;
+  background: white !important;
 }
 .container__inner {
   display: flex;
@@ -77,10 +72,12 @@ header {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@900&display=swap");
+@import "@/assets/main.css";
 
 body {
   padding: 0;
   margin: 0;
+  overflow-y: scroll;
 }
 
 a {

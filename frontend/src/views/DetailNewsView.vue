@@ -1,5 +1,10 @@
 <script>
+import MarkdownItVue from "vue3-markdown-it";
+import "@/assets/markdown.css";
 export default {
+  components: {
+    MarkdownItVue,
+  },
   data() {
     return {
       data: {},
@@ -39,7 +44,15 @@ export default {
           {{ data.title }}
         </div>
         <div class="body_news">
-          {{ data.full_text }}
+          <MarkdownItVue
+            :source="data.full_text"
+            :html="true"
+            :typographer="true"
+            :xhtmlOut="true"
+            :linkify="true"
+            :breaks="true"
+          />
+          <!-- {{ data.full_text }} -->
         </div>
       </div>
     </div>
@@ -87,7 +100,5 @@ export default {
   color: #5f6061;
   font-size: 17px;
   font-family: "Raleway", sans-serif;
-  line-height: 1.4;
-  white-space: pre-line;
 }
 </style>

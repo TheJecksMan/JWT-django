@@ -22,4 +22,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v2/', include('api.urls')),
+    path(r'mdeditor/', include('mdeditor.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

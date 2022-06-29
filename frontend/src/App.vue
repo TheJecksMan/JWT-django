@@ -93,7 +93,11 @@ body {
 }
 
 a {
+  color: #3ecf8e !important;
   text-decoration: none !important;
+}
+a:visited {
+  color: #3ecf8e !important;
 }
 span p h1 h2 h3 h4 h5 {
   font-family: "Raleway", sans-serif;

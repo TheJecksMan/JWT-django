@@ -1,4 +1,5 @@
 blockquote {
+  display: inline-block;
   border-left: 10px solid #ccc;
   border-radius: 5px;
   background: #f9f9f9;
@@ -47,4 +48,18 @@ th {
 
 li {
   margin-top: 8px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+strong {
+  color: #3ecf8e !important;
+}
+
+img {
+  width: 100%;
+  height: auto;
 }

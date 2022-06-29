@@ -5,7 +5,7 @@
         <div class="container">
           <div class="container__inner">
             <div class="logo">
-              <img src="@/assets/logo.svg" alt="" width="35" height="35" />
+              <img src="@/assets/logo.svg" alt="" width="15" height="15" />
               <span class="logo_text">SmartNoteBook</span>
             </div>
             <div class="navigation container__inner">

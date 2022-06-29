@@ -43,6 +43,7 @@ export default {
         <div class="title_news">
           {{ data.title }}
         </div>
+        <div class="line_news"></div>
         <div class="body_news">
           <MarkdownItVue
             :source="data.full_text"
@@ -62,10 +63,9 @@ export default {
 <style scoped>
 .container {
   padding: 100px 0 !important;
-  display: flex !important;
 }
 .container-news {
-  margin: 0 20px 60px 20px;
+  margin: 0 30px 60px 20px;
 }
 .back {
   color: #34495e;
@@ -91,7 +91,8 @@ export default {
   text-transform: uppercase;
 }
 .title_news {
-  margin: 10px 0;
+  margin-top: 20px;
+  margin-bottom: 10px;
   color: #373737;
   font-size: 21px;
   font-family: "Raleway", sans-serif;
@@ -100,5 +101,10 @@ export default {
   color: #5f6061;
   font-size: 17px;
   font-family: "Raleway", sans-serif;
+}
+.line_news {
+  margin: 30px 0 20px;
+  border: none;
+  border-top: 1px solid #ddd;
 }
 </style>

@@ -1,3 +1,38 @@
+<script>
+export default {
+  data() {
+    return {
+      username: "",
+    };
+  },
+  beforeMount() {
+    this.getUser();
+  },
+  methods: {
+    async getUser() {
+      const csrfToken = this.$cookies.get("csrftoken");
+      const result = await fetch(
+        "http://localhost:8000/api/v2/profile/current",
+        {
+          method: "POST",
+          mode: "cors",
+          credentials: "include",
+          headers: {
+            "X-CSRFToken": csrfToken,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+          },
+        }
+      );
+      const data = await result.json();
+      this.username = data.username;
+      console.log(this.username);
+    },
+  },
+};
+</script>
+
 <template>
   <div class="wrapper_main">
     <header>
@@ -23,6 +58,16 @@
                 <RouterLink :to="{ name: 'about' }">
                   <span class="item">О программе</span>
                 </RouterLink>
+              </div>
+              <div class="item_bar">
+                <span v-if="this.username != undefined" class="item item-user">
+                  {{ username }}
+                </span>
+                <div v-else>
+                  <RouterLink :to="{ name: 'login' }">
+                    <span class="item item-login">Войти</span>
+                  </RouterLink>
+                </div>
               </div>
             </div>
           </div>
@@ -78,6 +123,15 @@ header {
   margin: 0 10px;
   font-size: 18px;
   font-family: "Raleway", sans-serif;
+}
+.item-user {
+  color: #3ecf8e !important;
+  cursor: default;
+}
+
+.item-login {
+  color: #3ecf8e !important;
+  cursor: pointer !important;
 }
 </style>
 

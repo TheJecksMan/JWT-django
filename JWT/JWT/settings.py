@@ -22,15 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'd1j!@tyu45Gdswe-u*o-bft7b9=3ty5l3m!^m4@&79q)dh$_^!$s@wgodfa4pxt0bd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 ALLOWED_HOSTS = ['*']
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5050",
 ]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", ]
 # Application definition
 
 INSTALLED_APPS = [
@@ -143,3 +145,5 @@ STATICFILES_DIR = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_US_SESSIONS = True
+
+SESSION_COOKIE_AGE = 5*60*60*24

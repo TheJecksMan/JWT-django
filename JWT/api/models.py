@@ -1,5 +1,8 @@
+import datetime
+
 from django.db import models
 from mdeditor.fields import MDTextField
+from django.contrib.auth.models import User
 
 
 class NewsApp(models.Model):
@@ -15,3 +18,18 @@ class NewsApp(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
+
+
+class CommentsNews(models.Model):
+    news = models.ForeignKey(NewsApp, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,  on_delete=models.CASCADE)
+    comment = MDTextField('Комментарий')
+    date = models.DateTimeField('Дата публикации', default=datetime.datetime.now)
+
+    def __str__(self):
+        return self.comment
+
+    class Meta:
+
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Коментарии'

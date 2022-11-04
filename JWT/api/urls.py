@@ -11,5 +11,7 @@ urlpatterns = [
     path('auth/registration', baseViews.regustration_account, name='registration'),
     path('orc', baseViews.file_orc),
     path('news', newsViews.ListNews.as_view()),
+    path('news/add_comment', newsViews.add_comment, name='get_comments'),
+    path('news/get_comment', newsViews.Comments.as_view()),
     path('post', newsViews.Post.as_view())
 ]

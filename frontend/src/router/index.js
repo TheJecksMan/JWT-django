@@ -32,6 +32,21 @@ const router = createRouter({
       name: "NotFound",
       component: () => import("../views/PageNotFound.vue")
     },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("../views/LoginUser.vue")
+    },
+    {
+      path: "/logout",
+      name: "logout",
+      component: () => import("../views/LogoutUser.vue")
+    },
+    {
+      path: "/registration",
+      name: "registration",
+      component: () => import("../views/RegistartionUser.vue")
+    }
   ],
 });
 

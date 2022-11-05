@@ -22,15 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'd1j!@tyu45Gdswe-u*o-bft7b9=3ty5l3m!^m4@&79q)dh$_^!$s@wgodfa4pxt0bd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 ALLOWED_HOSTS = ['*']
+CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5050",
 ]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000", ]
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'mdeditor',
+    'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -80,7 +83,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'JWT.wsgi.application'
 
-
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+]
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
@@ -115,6 +122,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication'
     ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5,
 }
@@ -143,3 +151,5 @@ STATICFILES_DIR = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_US_SESSIONS = True
+
+SESSION_COOKIE_AGE = 5*60*60*24

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 
 
 class RegistartionAccount(serializers.Serializer):
+    email = serializers.EmailField(required=True, max_length=320)
     username = serializers.CharField(required=True, max_length=150, validators=[UniqueValidator(
         User.objects.all(), 'Такой логин уже зарегистрирован')])
     password = serializers.CharField(required=True)

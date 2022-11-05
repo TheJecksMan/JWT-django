@@ -1,6 +1,8 @@
 from datetime import datetime
+
+from django.contrib.auth.models import User
 from rest_framework import serializers
-from ..models import NewsApp
+from ..models import NewsApp, CommentsNews
 
 
 class ListNews(serializers.ModelSerializer):
@@ -19,6 +21,19 @@ class GetNews(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         return change_json(super().to_representation(instance))
+
+
+class SetComment(serializers.Serializer):
+    text = serializers.CharField(required=True, max_length=500)
+    news_id = serializers.IntegerField(required=True)
+
+
+class GetComments(serializers.ModelSerializer):
+    user = serializers.SlugRelatedField(slug_field='username', queryset=User.objects)
+
+    class Meta:
+        model = CommentsNews
+        fields = ('id', 'user', 'comment', 'date')
 
 
 def change_json(result):

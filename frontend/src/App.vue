@@ -1,3 +1,38 @@
+<script>
+export default {
+  data() {
+    return {
+      username: "",
+    };
+  },
+  beforeMount() {
+    this.getUser();
+  },
+  methods: {
+    async getUser() {
+      const csrfToken = this.$cookies.get("csrftoken");
+      const result = await fetch(
+        "http://localhost:8000/api/v2/profile/current",
+        {
+          method: "POST",
+          mode: "cors",
+          credentials: "include",
+          headers: {
+            "X-CSRFToken": csrfToken,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+          },
+        }
+      );
+      const data = await result.json();
+      this.username = data.username;
+      console.log(this.username);
+    },
+  },
+};
+</script>
+
 <template>
   <div class="wrapper_main">
     <header>
@@ -23,6 +58,26 @@
                 <RouterLink :to="{ name: 'about' }">
                   <span class="item">О программе</span>
                 </RouterLink>
+              </div>
+              <div class="item_bar">
+                <div v-if="this.username != undefined" class="dropdown">
+                  <div class="dropbtn item item-user">
+                    {{ username }}
+                  </div>
+                  <div class="dropdown-content">
+                    <RouterLink :to="{ name: 'logout' }">
+                      <span class="item">Выход</span>
+                    </RouterLink>
+                  </div>
+                </div>
+                <!-- <span v-if="this.username != undefined" class="item item-user">
+                  {{ username }}
+                </span> -->
+                <div v-else>
+                  <RouterLink :to="{ name: 'login' }">
+                    <span class="item item-login">Войти</span>
+                  </RouterLink>
+                </div>
               </div>
             </div>
           </div>
@@ -64,7 +119,6 @@ header {
   align-items: center;
 }
 .navigation {
-  margin: 10px;
 }
 .logo_text {
   color: black;
@@ -78,6 +132,48 @@ header {
   margin: 0 10px;
   font-size: 18px;
   font-family: "Raleway", sans-serif;
+}
+.item-user {
+  color: #3ecf8e !important;
+  cursor: default;
+}
+
+.item-login {
+  color: #3ecf8e !important;
+  cursor: pointer !important;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+.dropdown .dropbtn {
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  margin: 0;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 </style>
 

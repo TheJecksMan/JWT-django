@@ -24,7 +24,7 @@ class GetNews(serializers.ModelSerializer):
 
 
 class SetComment(serializers.Serializer):
-    text = serializers.CharField(required=True)
+    text = serializers.CharField(required=True, max_length=500)
     news_id = serializers.IntegerField(required=True)
 
 

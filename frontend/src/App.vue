@@ -60,9 +60,19 @@ export default {
                 </RouterLink>
               </div>
               <div class="item_bar">
-                <span v-if="this.username != undefined" class="item item-user">
+                <div v-if="this.username != undefined" class="dropdown">
+                  <div class="dropbtn item item-user">
+                    {{ username }}
+                  </div>
+                  <div class="dropdown-content">
+                    <RouterLink :to="{ name: 'logout' }">
+                      <span class="item">Выход</span>
+                    </RouterLink>
+                  </div>
+                </div>
+                <!-- <span v-if="this.username != undefined" class="item item-user">
                   {{ username }}
-                </span>
+                </span> -->
                 <div v-else>
                   <RouterLink :to="{ name: 'login' }">
                     <span class="item item-login">Войти</span>
@@ -109,7 +119,6 @@ header {
   align-items: center;
 }
 .navigation {
-  margin: 10px;
 }
 .logo_text {
   color: black;
@@ -132,6 +141,39 @@ header {
 .item-login {
   color: #3ecf8e !important;
   cursor: pointer !important;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+.dropdown .dropbtn {
+  border: none;
+  outline: none;
+  padding: 14px 16px;
+  margin: 0;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 </style>
 

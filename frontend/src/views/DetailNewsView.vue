@@ -12,9 +12,12 @@ export default {
   },
   data() {
     return {
+      num_page_comment: 1,
       count_comments: 0,
       data: {},
       comments: {},
+      next: {},
+      previous: {},
       text: "",
     };
   },
@@ -36,11 +39,13 @@ export default {
     async getComments() {
       let id = Object.values(this.$route.params)[0];
       const result = await fetch(
-        "http://localhost:8000/api/v2/news/get_comment?news=" + id
+        `http://localhost:8000/api/v2/news/get_comment?news=${id}&ordering=-date&page=${this.num_page_comment}`
       );
-      const comments = await result.json();
-      this.comments = comments;
-      this.count_comments = comments.count;
+      const data = await result.json();
+      this.comments = data.results;
+      this.previous = data.previous;
+      this.next = data.next;
+      this.count_comments = data.count;
     },
 
     async sendComment() {
@@ -66,7 +71,20 @@ export default {
         }
       );
       // const res = await result.json();
-      console.log(response.status);
+      if (response.status == 200) {
+        await this.getComments();
+        this.text = "";
+      } else {
+        const data = await response.json();
+        alert(data.detail.text);
+      }
+    },
+    async changePages(page) {
+      const result = await fetch(page);
+      const data = await result.json();
+      this.comments = data.results;
+      this.previous = data.previous;
+      this.next = data.next;
     },
   },
 };
@@ -106,6 +124,18 @@ export default {
           <span class="title-comment">Комментарии</span>
         </div>
         <div class="container-comment">
+          <div class="create-comment">
+            <md-editor v-model="text" language="en-US" />
+            <div class="send-commnet">
+              <button
+                class="button button-comment"
+                @click="sendComment"
+                type="submit"
+              >
+                Отправить
+              </button>
+            </div>
+          </div>
           <div class="comment">
             <div v-if="count_comments == 0">
               <div class="body-comment">
@@ -115,7 +145,7 @@ export default {
             <div v-else>
               <div
                 class="comments-div"
-                v-for="comment in comments.results"
+                v-for="comment in comments"
                 :key="comment.id"
               >
                 <div class="user-comment">
@@ -133,12 +163,28 @@ export default {
                   />
                 </div>
               </div>
+              <div v-if="count_comments != 0" class="paginator">
+                <div>
+                  <span
+                    @click="changePages(previous)"
+                    class="pages"
+                    v-if="previous !== null"
+                  >
+                    ← Предыдущая
+                  </span>
+                </div>
+                <div>
+                  <span
+                    @click="changePages(next)"
+                    class="pages"
+                    v-if="next !== null"
+                  >
+                    Следующая →
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="create-comment">
-          <md-editor v-model="text" language="en-US" />
-          <button @click="sendComment" type="submit">Отправить</button>
         </div>
       </div>
     </div>
@@ -193,7 +239,7 @@ export default {
   border-top: 1px solid #ddd;
 }
 .container-comment {
-  margin-top: 30px;
+  margin-top: 20px;
 }
 .title-comment {
   color: #373737;
@@ -203,6 +249,7 @@ export default {
 .comments-div {
   margin: 25px 0;
 }
+/* comments */
 .user-comment {
   color: #3ecf8e;
   font-size: 16px;
@@ -219,5 +266,35 @@ export default {
 }
 .user-color {
   color: #373737 !important;
+}
+.send-commnet {
+  display: flex;
+}
+.button {
+  font-family: "Raleway", sans-serif;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #33aa74;
+  background: #33aa74;
+  color: #fff;
+  height: 48px;
+}
+.button-comment {
+  margin-left: auto;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+/* paginator */
+.paginator {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+.pages {
+  font-family: "Raleway", sans-serif;
+  border: 1px solid rgba(60, 60, 60, 0.12);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
 }
 </style>

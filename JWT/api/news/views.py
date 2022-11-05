@@ -13,6 +13,7 @@ from rest_framework.request import Request
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 
 class ListNews(ListAPIView):
@@ -46,8 +47,9 @@ class Comments(ListAPIView):
     """
     queryset = CommentsNews.objects.all()
     serializer_class = GetComments
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend, filters.OrderingFilter]
     filterset_fields = ['news']
+    ordering_fields = ['date']
     pagination_class = PageNumberPagination
 
 

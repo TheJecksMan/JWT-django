@@ -11,8 +11,8 @@ export default {
     this.getNews();
   },
   methods: {
-    async getNews() {
-      const result = await fetch("http://localhost:8000/api/v2/news?page=1");
+    async getNews() {      
+      const result = await fetch(`http://${import.meta.env.VITE_BACKEND_HOST}/api/v2/news?page=1`);
       const data = await result.json();
       this.previous = data.previous;
       this.next = data.next;

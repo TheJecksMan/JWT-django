@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  frontend:
+    container_name: frontend_diploma
+    image: frontend_diploma
+    restart: always
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    ports:
+      - '80:80'
+    environment:
+      - NODE_ENV=production
+      - VITE_BACKEND_HOST=backend
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+    depends_on:
+      - backend
+
+  backend:
+    container_name: backend_diploma
+    image: backend_diploma
+    restart: always
+    build:
+      context: .
+      dockerfile: ./JWT/Dockerfile
+    environment:
+      - DEBUG=False
+      - DATABASE_ENGINE=django.db.backends.postgresql
+      - DATABASE_NAME=diplome
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_HOST=postgres_database
+    ports:
+      - '8000:8000'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fastapi.rule=Host(`192.168.1.3`)" # domain or ip machine
+    depends_on:
+      - postgres_database
+
+  postgres_database:
+    container_name: database_diploma
+    image: postgres:15-alpine
+    restart: always
+    expose:
+      - '5433'
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=diplome
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+volumes:
+  pg-data:

@@ -25,7 +25,7 @@ export default {
       const csrfToken = this.$cookies.get("csrftoken");
 
       const result = await fetch(
-        "http://localhost:8000/api/v2/auth/login_site",
+        `http://${import.meta.env.VITE_BACKEND_HOST}/api/v2/auth/login_site`,
         {
           method: "POST",
           mode: "cors",

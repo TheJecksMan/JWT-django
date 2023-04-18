@@ -12,7 +12,7 @@ export default {
     async getUser() {
       const csrfToken = this.$cookies.get("csrftoken");
       const result = await fetch(
-        "http://localhost:8000/api/v2/profile/current",
+        `http://${import.meta.env.VITE_BACKEND_HOST}/api/v2/profile/current`,
         {
           method: "POST",
           mode: "cors",

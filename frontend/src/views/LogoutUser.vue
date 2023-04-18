@@ -4,7 +4,7 @@ export default {
     async logout() {
       const csrfToken = this.$cookies.get("csrftoken");
 
-      await fetch("http://localhost:8000/api/v2/auth/logout", {
+      await fetch(`http://${import.meta.env.VITE_BACKEND_HOST}/api/v2/auth/logout`, {
         method: "POST",
         mode: "cors",
         credentials: "include",

@@ -35,9 +35,6 @@ services:
       - DATABASE_HOST=postgres_database
     ports:
       - '8000:8000'
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.fastapi.rule=Host(`192.168.1.3`)" # domain or ip machine
     depends_on:
       - postgres_database
 
